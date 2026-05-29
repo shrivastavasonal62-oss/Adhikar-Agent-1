@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:8000/process-documents';
+const API_URL ='/process-documents';
 let pdfBlob = null;
 
 const SCHEMES = {

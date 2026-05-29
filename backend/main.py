@@ -1,6 +1,8 @@
 from fastapi import FastAPI, File, UploadFile, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
+from pathlib import Path
 import uvicorn
 import os
 import uuid
@@ -30,8 +32,14 @@ app.add_middleware(
     ],
 )
 
-os.makedirs("outputs", exist_ok=True)
-os.makedirs("templates", exist_ok=True)
+BASE_DIR = Path(__file__).resolve().parent
+FRONTEND_DIR = BASE_DIR.parent / "frontend"
+
+os.makedirs(BASE_DIR / "outputs", exist_ok=True)
+os.makedirs(BASE_DIR / "templates", exist_ok=True)
+
+if FRONTEND_DIR.exists():
+    app.mount("/static", StaticFiles(directory=FRONTEND_DIR), name="static")
 
 
 @app.post("/process-documents")
@@ -136,10 +144,10 @@ FULL DOCUMENT TEXT:
     print("\n[MAIN] Generating PDF...")
 
     try:
-        output_filename = f"outputs/application_{uuid.uuid4().hex[:8]}.pdf"
-        template_path = "templates/pmay_form.pdf"
+        output_filename = BASE_DIR / "outputs" / f"application_{uuid.uuid4().hex[:8]}.pdf"
+        template_path = BASE_DIR / "templates" / "pmay_form.pdf"
 
-        auto_fill_pdf(template_path, output_filename, eligibility_data)
+        auto_fill_pdf(str(template_path), str(output_filename), eligibility_data)
         print(f"[MAIN] PDF generated: {output_filename}")
 
     except Exception as e:
@@ -167,7 +175,7 @@ FULL DOCUMENT TEXT:
     print(f"{'=' * 50}\n")
 
     return FileResponse(
-        path=output_filename,
+        path=str(output_filename),
         media_type="application/pdf",
         filename="Adhikar_Application_Form.pdf",
         headers=headers,
@@ -175,12 +183,17 @@ FULL DOCUMENT TEXT:
 
 
 @app.get("/")
-def health_check():
+def serve_frontend():
+    index_path = FRONTEND_DIR / "index.html"
+
+    if index_path.exists():
+        return FileResponse(index_path)
+
     return {
         "status": "running",
         "service": "Adhikar-Agent API",
         "version": "1.0.0",
-        "endpoints": ["/process-documents", "/health"],
+        "endpoints": ["/process-documents", "/health", "/docs"],
     }
 
 
