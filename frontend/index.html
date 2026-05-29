@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adhikar-Agent | Government Scheme Automation</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ═══════════════════════════
+     SPLASH SCREEN
+═══════════════════════════ -->
+<div id="splash">
+  <div class="splash-inner">
+
+    <div class="emblem-wrap">
+      <div class="emblem-ring"></div>
+      <img src="emblem.png" class="emblem-img" alt="Emblem of India">
+    </div>
+
+    <h1 class="splash-title">Adhikar-Agent</h1>
+    <p class="splash-hindi">आधिकार एजेंट</p>
+    <div class="splash-rule"></div>
+    <p class="splash-tag">Empowering every citizen with their rightful schemes</p>
+    <button class="start-btn" onclick="enterApp()">START</button>
+
+    <div class="splash-footer">
+      <span>AI for Bharat 2026</span>
+      <span class="dot-sep">·</span>
+      <span>Powered by Amazon Bedrock</span>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════
+     MAIN APP
+═══════════════════════════ -->
+<div id="app">
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="nav-left">
+      <a href="#" class="nav-logo">⚖️ Adhikar<em>Agent</em></a>
+      <div class="nav-links">
+        <div class="nav-dd">
+          <button class="nav-dd-btn">
+            Schemes
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="dd-menu">
+            <a class="dd-item" href="https://pmaymis.gov.in/" target="_blank">
+              <span class="dd-icon">🏠</span>
+              <div><h4>PMAY</h4><p>Pradhan Mantri Awas Yojana</p></div>
+            </a>
+            <a class="dd-item" href="https://pmkisan.gov.in/" target="_blank">
+              <span class="dd-icon">🌾</span>
+              <div><h4>PM-KISAN</h4><p>Kisan Samman Nidhi Yojana</p></div>
+            </a>
+            <a class="dd-item" href="https://pmjay.gov.in/" target="_blank">
+              <span class="dd-icon">🏥</span>
+              <div><h4>Ayushman Bharat</h4><p>PM Jan Arogya Yojana</p></div>
+            </a>
+            <a class="dd-item" href="https://scholarships.gov.in/" target="_blank">
+              <span class="dd-icon">📚</span>
+              <div><h4>SC/ST Scholarship</h4><p>Post-Matric Scholarship</p></div>
+            </a>
+          </div>
+        </div>
+        <a class="nav-link" href="#how-it-works">How it Works</a>
+        <a class="nav-link" href="#upload">Try Now</a>
+      </div>
+    </div>
+    <a class="nav-badge" href="https://vision.hack2skill.com/event/ai-for-bharat" target="_blank">🏆 AI for Bharat 2026</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg-orb orb1"></div>
+    <div class="hero-bg-orb orb2"></div>
+    <div class="hero-bg-orb orb3"></div>
+    <div class="hero-content">
+      <div class="hero-tag">⚡ AWS Textract + Amazon Nova Pro AI</div>
+      <h1>Your Rights.<br><span class="g-text">Automated.</span></h1>
+      <p class="hero-sub">Upload your documents once. Our AI instantly checks 4 government schemes and auto-fills your application — no agent, no bribe, no confusion.</p>
+      <div class="pills">
+        <span class="pill">🏠 PMAY</span>
+        <span class="pill">🌾 PM-KISAN</span>
+        <span class="pill">🏥 Ayushman Bharat</span>
+        <span class="pill">📚 SC/ST Scholarship</span>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><strong>4</strong><span>Schemes</span></div>
+        <div class="stat-div"></div>
+        <div class="stat"><strong>~10s</strong><span>Processing</span></div>
+        <div class="stat-div"></div>
+        <div class="stat"><strong>100%</strong><span>AWS Powered</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAIN -->
+  <main class="main" id="upload">
+
+    <!-- UPLOAD -->
+    <section class="card" id="uploadSection">
+      <div class="card-head">
+        <div class="step-pill">Step 01 — Upload</div>
+        <h2>Upload Your Documents</h2>
+        <p>Upload any combination. Our AI extracts what it needs automatically.</p>
+      </div>
+      <div class="upload-grid">
+        <div class="ubox" id="box-aadhaar" onclick="document.getElementById('aadhaar').click()">
+          <div class="u-icon">🪪</div><h3>Aadhaar Card</h3>
+          <p class="u-hint">Front side preferred</p>
+          <input type="file" id="aadhaar" accept=".jpg,.jpeg,.png,.pdf,image/jpeg,image/png,application/pdf" onchange="onFile(this,'aadhaar')">
+          <div class="u-status" id="st-aadhaar">Click to upload</div>
+        </div>
+        <div class="ubox" id="box-voter" onclick="document.getElementById('voter').click()">
+          <div class="u-icon">🗳️</div><h3>Income Certificate</h3>
+          <p class="u-hint">Any side accepted</p>
+          <input type="file" id="voter" accept=".jpg,.jpeg,.png,.pdf,image/jpeg,image/png,application/pdf" onchange="onFile(this,'voter')">
+          <div class="u-status" id="st-voter">Click to upload</div>
+        </div>
+        <div class="ubox" id="box-ration" onclick="document.getElementById('ration').click()">
+          <div class="u-icon">🏪</div><h3>Ration Card</h3>
+          <p class="u-hint">BPL/APL card</p>
+          <input type="file" id="ration" accept=".jpg,.jpeg,.png,.pdf,image/jpeg,image/png,application/pdf" onchange="onFile(this,'ration')">
+          <div class="u-status" id="st-ration">Click to upload</div>
+        </div>
+        <div class="ubox" id="box-caste" onclick="document.getElementById('caste').click()">
+          <div class="u-icon">📋</div><h3>Caste Certificate</h3>
+          <p class="u-hint">SC/ST/OBC cert</p>
+          <input type="file" id="caste" accept=".jpg,.jpeg,.png,.pdf,image/jpeg,image/png,application/pdf" onchange="onFile(this,'caste')">
+          <div class="u-status" id="st-caste">Click to upload</div>
+        </div>
+      </div>
+      <div class="upload-note">🔒 Aadhaar is masked before AI processing. Documents are never stored.</div>
+      <button class="btn-main" id="submitBtn" onclick="startProcess()">🚀 Check My Eligibility Now</button>
+    </section>
+
+    <!-- TERMINAL -->
+    <section class="card hidden" id="terminalSection">
+      <div class="card-head">
+        <div class="step-pill">Step 02 — Processing</div>
+        <h2>⚙️ AI Processing Your Documents</h2>
+        <p>Watch our AWS pipeline work in real time</p>
+      </div>
+      <div class="terminal">
+        <div class="t-header">
+          <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+          <span class="t-title">adhikar-agent — aws pipeline running</span>
+        </div>
+        <div class="t-body" id="tBody"></div>
+      </div>
+      <div class="prog-wrap"><div class="prog-fill" id="pFill"></div></div>
+      <p class="prog-lbl" id="pLbl">Initializing...</p>
+    </section>
+
+    <!-- RESULTS -->
+    <section class="card hidden" id="resultsSection">
+      <div class="card-head">
+        <div class="step-pill green">Step 03 — Results</div>
+        <h2>✅ Eligibility Results</h2>
+        <p>Based on your uploaded documents</p>
+      </div>
+      <div class="scheme-results" id="schemeResults"></div>
+      <div class="app-info" id="appInfo"></div>
+      <div class="dl-box">
+        <div class="dl-icon">📄</div>
+        <h3>Application Form Auto-Filled!</h3>
+        <p>Download and submit at any Common Service Centre (CSC) near you.</p>
+        <button class="btn-dl" onclick="downloadPDF()">⬇️ Download Application Form</button>
+      </div>
+    </section>
+
+    <!-- ERROR -->
+    <section class="card hidden" id="errorSection">
+      <div class="err-box">
+        <div class="err-icon">❌</div>
+        <h2>Processing Failed</h2>
+        <p id="errMsg">Something went wrong. Please try again.</p>
+        <button class="btn-retry" onclick="resetAll()">🔄 Try Again</button>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- HOW IT WORKS -->
+  <section class="hiw" id="how-it-works">
+    <h2>How <span class="g-text">Adhikar-Agent</span> Works</h2>
+    <div class="hiw-grid">
+      <div class="hiw-card">
+        <div class="hiw-n">1</div><div class="hiw-icon">📤</div>
+        <h3>Upload Documents</h3><p>Aadhaar, Voter ID, Ration Card or Caste Certificate</p>
+      </div>
+      <div class="arrow">→</div>
+      <div class="hiw-card">
+        <div class="hiw-n">2</div><div class="hiw-icon">🔍</div>
+        <h3>Textract Reads</h3><p>AWS Textract extracts all text. Aadhaar is masked for privacy.</p>
+      </div>
+      <div class="arrow">→</div>
+      <div class="hiw-card">
+        <div class="hiw-n">3</div><div class="hiw-icon">🤖</div>
+        <h3>Nova Pro Decides</h3><p>Amazon Nova Pro checks eligibility across 4 government schemes</p>
+      </div>
+      <div class="arrow">→</div>
+      <div class="hiw-card">
+        <div class="hiw-n">4</div><div class="hiw-icon">📄</div>
+        <h3>PDF Auto-Filled</h3><p>Application form filled and ready to download instantly</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCHEMES -->
+  <section class="schemes">
+    <h2>Schemes We <span class="g-text">Check</span></h2>
+    <div class="schemes-grid">
+      <a class="sc-card" href="https://pmaymis.gov.in/" target="_blank">
+        <div class="sc-emoji">🏠</div><h3>PMAY</h3>
+        <p class="sc-full">Pradhan Mantri Awas Yojana</p>
+        <p>Housing for all. Income below ₹18L, no pucca house owned.</p>
+        <div class="sc-ben">💰 Subsidized home loan up to ₹2.67L</div>
+      </a>
+      <a class="sc-card" href="https://pmkisan.gov.in/" target="_blank">
+        <div class="sc-emoji">🌾</div><h3>PM-KISAN</h3>
+        <p class="sc-full">Kisan Samman Nidhi Yojana</p>
+        <p>For farmers with land. Income below ₹6L.</p>
+        <div class="sc-ben">💰 ₹6,000/year direct bank transfer</div>
+      </a>
+      <a class="sc-card" href="https://pmjay.gov.in/" target="_blank">
+        <div class="sc-emoji">🏥</div><h3>Ayushman Bharat</h3>
+        <p class="sc-full">PM Jan Arogya Yojana</p>
+        <p>BPL families without government health insurance.</p>
+        <div class="sc-ben">💰 ₹5 lakh health coverage/year</div>
+      </a>
+      <a class="sc-card" href="https://scholarships.gov.in/" target="_blank">
+        <div class="sc-emoji">📚</div><h3>SC/ST Scholarship</h3>
+        <p class="sc-full">Post-Matric Scholarship Scheme</p>
+        <p>SC/ST students pursuing higher education.</p>
+        <div class="sc-ben">💰 Full tuition + maintenance allowance</div>
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="ft">
+      <div class="ft-logo">⚖️ AdhikarAgent</div>
+      <div class="ft-links">
+        <a href="https://pmaymis.gov.in/" target="_blank">PMAY</a>
+        <a href="https://pmkisan.gov.in/" target="_blank">PM-KISAN</a>
+        <a href="https://pmjay.gov.in/" target="_blank">Ayushman Bharat</a>
+        <a href="https://scholarships.gov.in/" target="_blank">Scholarship</a>
+        <a href="https://www.aiforbharat.in/" target="_blank">AI for Bharat</a>
+      </div>
+    </div>
+    <div class="ft-bottom">
+      <p>Built with ❤️ by Team Adhikar-Agent &nbsp;·&nbsp; <strong>AI for Bharat Hackathon 2026</strong></p>
+      <p>Powered by <strong>AWS Textract</strong> · <strong>Amazon Nova Pro</strong> · <strong>Amazon Bedrock</strong></p>
+    </div>
+  </footer>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
